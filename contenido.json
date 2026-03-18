@@ -117,16 +117,29 @@
   "miembros": [
     {
       "id": 1,
+      "tipo": "activo",
       "nombre": "Dr. César Costa Vera",
+      "iniciales": "CCV",
       "categoria": "investigador",
       "rol": "Investigador Principal · Jefe de Laboratorio",
       "especialidad": "LIBS · MALDI-TOF · Espectroscopía láser · Nanociencia",
-      "iniciales": "CC",
-      "foto": "",
-      "tipo": "activo",
-      "orcid": "0000-0002-6222-4117",
       "periodo": "",
-      "posicion_actual": ""
+      "posicion_actual": "",
+      "orcid": "0000-0001-5242-1892",
+      "foto": "img/miembros/miembro-1773868955956.jpg"
+    },
+    {
+      "id": 2,
+      "tipo": "activo",
+      "nombre": "Fis. Juan Molina",
+      "iniciales": "JM",
+      "categoria": "investigador",
+      "rol": "Estudiante de Doctorado",
+      "especialidad": "LIBS",
+      "periodo": "",
+      "posicion_actual": "",
+      "orcid": "0000-0002-1364-8960",
+      "foto": "img/miembros/miembro-1773869190864.jpg"
     }
   ],
   "publicaciones": [
