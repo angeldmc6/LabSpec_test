@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LEO — Laboratorio de Espectroscopía Óptica EPN</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy: #0a1628; --navy-mid: #162240; --blue-accent: #1a5c9e;
+  --gold: #c89a2e; --gold-light: #e8c46a;
+  --text-light: #f5f3ee; --text-muted: #a8b4c8; --text-body: #2c3340;
+  --surface: #ffffff; --surface-alt: #f7f6f2; --border: #ddd9d0;
+  --serif: 'EB Garamond', Georgia, serif;
+  --sans: 'IBM Plex Sans', system-ui, sans-serif;
+}
+body { font-family: var(--sans); color: var(--text-body); background: var(--surface); font-size: 15px; line-height: 1.7; }
+
+/* NAV */
+nav { background: var(--navy); border-bottom: 2px solid var(--gold); position: sticky; top: 0; z-index: 100; }
+.nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.nav-logo { font-family: var(--serif); font-size: 1.3rem; color: var(--gold-light); text-decoration: none; letter-spacing: 0.03em; cursor: pointer; }
+.nav-logo span { font-size: 0.72rem; color: var(--text-muted); display: block; font-family: var(--sans); font-weight: 300; letter-spacing: 0.08em; text-transform: uppercase; }
+.nav-links { display: flex; gap: 0; list-style: none; }
+.nav-links button { display: block; padding: 0 0.9rem; height: 60px; background: none; border: none; color: var(--text-muted); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: color 0.2s, background 0.2s; font-family: var(--sans); border-bottom: 2px solid transparent; margin-bottom: -2px; }
+.nav-links button:hover { color: var(--gold-light); background: rgba(200,154,46,0.08); }
+.nav-links button.active { color: var(--gold-light); border-bottom: 2px solid var(--gold); }
+.nav-admin-btn { background: none; border: 1px solid rgba(200,154,46,0.3); color: var(--text-muted); font-size: 0.7rem; padding: 0.3rem 0.8rem; cursor: pointer; font-family: var(--sans); letter-spacing: 0.08em; text-transform: uppercase; transition: all 0.2s; margin-left: 1rem; }
+.nav-admin-btn:hover { border-color: var(--gold); color: var(--gold-light); }
+
+/* PAGES */
+.page { display: none; animation: fadeIn 0.25s ease; }
+.page.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+/* HERO */
+.hero { background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 60%, #1e3a5f 100%); min-height: 480px; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 4rem 2rem; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 50%, rgba(26,92,158,0.25) 0%, transparent 65%); }
+.hero-text { max-width: 520px; position: relative; z-index: 1; margin: 0 auto; }
+.hero-label { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; font-weight: 500; }
+.hero h1 { font-family: var(--serif); font-size: 2.8rem; font-weight: 400; color: var(--text-light); line-height: 1.2; margin-bottom: 1.5rem; }
+.hero h1 em { color: var(--gold-light); font-style: italic; }
+.hero p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 2rem; }
+.hero-cta { display: inline-block; padding: 0.6rem 1.6rem; border: 1.5px solid var(--gold); color: var(--gold-light); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; cursor: pointer; background: none; font-family: var(--sans); transition: background 0.2s; }
+.hero-cta:hover { background: rgba(200,154,46,0.12); }
+.hero-visual { position: relative; z-index: 1; display: flex; justify-content: center; align-items: center; }
+
+/* SECTIONS */
+.section { padding: 3.5rem 2rem; max-width: 1100px; margin: 0 auto; }
+.section-alt { background: var(--surface-alt); padding: 3.5rem 2rem; }
+.section-alt .section { padding: 0; }
+.section-title { font-family: var(--serif); font-size: 1.9rem; font-weight: 400; color: var(--navy); margin-bottom: 0.4rem; }
+.section-rule { width: 48px; height: 2px; background: var(--gold); margin-bottom: 2.5rem; }
+
+/* NEWS */
+.news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+.news-card { background: var(--surface); border: 0.5px solid var(--border); border-top: 3px solid var(--gold); padding: 1.5rem; }
+.news-tag { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 0.5rem; }
+.news-card h3 { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; color: var(--navy); line-height: 1.4; margin-bottom: 0.6rem; }
+.news-card p { font-size: 0.88rem; color: #555; line-height: 1.7; }
+.news-date { margin-top: 1rem; font-size: 0.78rem; color: var(--text-muted); }
+
+/* ABOUT */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 2rem; }
+.about-text p { color: #3a4050; margin-bottom: 1rem; font-size: 0.95rem; }
+.about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+.stat-box { background: var(--navy); color: var(--text-light); padding: 1.2rem; text-align: center; }
+.stat-number { font-family: var(--serif); font-size: 2.2rem; color: var(--gold-light); line-height: 1; display: block; }
+.stat-label { font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.4rem; display: block; }
+
+/* RESEARCH */
+.research-list { display: flex; flex-direction: column; gap: 2.5rem; }
+.research-block { padding-bottom: 2.5rem; border-bottom: 0.5px solid var(--border); }
+.research-block:last-child { border-bottom: none; }
+.research-block h3 { font-family: var(--serif); font-size: 1.4rem; font-weight: 600; color: var(--navy); margin-bottom: 0.5rem; }
+.research-block p { font-size: 0.9rem; color: #444; line-height: 1.8; }
+.research-tag { display: inline-block; font-size: 0.7rem; background: var(--surface-alt); border: 0.5px solid var(--border); padding: 0.2rem 0.7rem; margin: 0.5rem 0.3rem 0 0; color: var(--blue-accent); font-weight: 500; }
+
+/* MEMBERS */
+.members-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.5rem; }
+.member-card { background: var(--surface); border: 0.5px solid var(--border); padding: 1.8rem 1rem; text-align: center; }
+.member-avatar { width: 68px; height: 68px; border-radius: 50%; background: var(--navy); margin: 0 auto 0.8rem; display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 1.3rem; color: var(--gold-light); font-style: italic; }
+.member-name { font-family: var(--serif); font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.2rem; }
+.member-role { font-size: 0.78rem; color: var(--blue-accent); font-weight: 500; margin-bottom: 0.3rem; }
+.member-sub { font-size: 0.78rem; color: var(--text-muted); }
+.members-category-label { font-size: 0.78rem; color: var(--navy); font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; }
+
+/* PUBLICATIONS */
+.pub-list { display: flex; flex-direction: column; gap: 1.2rem; }
+.pub-item { border-left: 3px solid var(--blue-accent); padding: 1rem 1.2rem; background: var(--surface-alt); }
+.pub-item h4 { font-family: var(--serif); font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.3rem; line-height: 1.4; }
+.pub-authors { font-size: 0.85rem; color: #555; font-style: italic; margin-bottom: 0.25rem; }
+.pub-journal { font-size: 0.83rem; color: var(--blue-accent); }
+.pub-year-divider { font-family: var(--serif); font-size: 1.3rem; color: var(--navy); margin: 2rem 0 1rem; font-weight: 600; border-bottom: 0.5px solid var(--border); padding-bottom: 0.4rem; }
+
+/* CONTACT */
+.contact-page { background: var(--navy); padding: 4rem 2rem; }
+.contact-inner { max-width: 1100px; margin: 0 auto; }
+.contact-page .section-title { color: var(--text-light); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2.5rem; margin-top: 2rem; }
+.contact-block h4 { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; color: var(--gold-light); margin-bottom: 0.8rem; }
+.contact-block p, .contact-block a { font-size: 0.88rem; color: var(--text-muted); line-height: 1.9; display: block; text-decoration: none; }
+.contact-block a:hover { color: var(--gold-light); }
+.supporters { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 3rem; padding-top: 2rem; }
+.supporters-label { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.2rem; }
+.supporters-list { display: flex; gap: 1rem; flex-wrap: wrap; }
+.supporter-tag { background: rgba(255,255,255,0.07); border: 0.5px solid rgba(255,255,255,0.15); padding: 0.4rem 1rem; font-size: 0.8rem; color: var(--text-muted); }
+
+/* JOIN */
+.join-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem; }
+.join-block h3 { font-family: var(--serif); font-size: 1.3rem; font-weight: 600; color: var(--navy); margin-bottom: 0.8rem; border-left: 3px solid var(--gold); padding-left: 0.8rem; }
+.join-block p { font-size: 0.9rem; color: #444; margin-bottom: 1rem; }
+.join-block ul { padding-left: 1.2rem; font-size: 0.9rem; color: #444; line-height: 2; }
+
+footer { background: #060e1a; padding: 1.2rem 2rem; text-align: center; font-size: 0.75rem; color: #4a5568; }
+
+/* ===== ADMIN PANEL ===== */
+#admin-login-overlay {
+  display: none; position: fixed; inset: 0; background: rgba(10,22,40,0.92);
+  z-index: 1000; align-items: center; justify-content: center;
+}
+#admin-login-overlay.show { display: flex; }
+.login-box {
+  background: var(--surface); padding: 2.5rem; width: 360px;
+  border-top: 3px solid var(--gold);
+}
+.login-box h2 { font-family: var(--serif); font-size: 1.5rem; color: var(--navy); margin-bottom: 0.3rem; }
+.login-box p { font-size: 0.85rem; color: #888; margin-bottom: 1.5rem; }
+.login-box input { width: 100%; border: 0.5px solid var(--border); padding: 0.6rem 0.8rem; font-family: var(--sans); font-size: 0.9rem; margin-bottom: 1rem; outline: none; }
+.login-box input:focus { border-color: var(--gold); }
+.btn-primary { background: var(--navy); color: var(--gold-light); border: none; padding: 0.6rem 1.5rem; font-family: var(--sans); font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; width: 100%; }
+.btn-primary:hover { background: var(--navy-mid); }
+.login-error { color: #c0392b; font-size: 0.82rem; margin-top: 0.5rem; display: none; }
+
+/* Admin Panel Layout */
+#admin-panel { display: none; }
+#admin-panel.show { display: block; }
+.admin-header { background: var(--navy); padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid var(--gold); }
+.admin-header h1 { font-family: var(--serif); color: var(--gold-light); font-size: 1.3rem; font-weight: 400; }
+.admin-header span { font-size: 0.75rem; color: var(--text-muted); }
+.btn-logout { background: none; border: 1px solid rgba(200,154,46,0.4); color: var(--text-muted); padding: 0.3rem 0.9rem; font-size: 0.75rem; cursor: pointer; font-family: var(--sans); letter-spacing: 0.08em; text-transform: uppercase; transition: all 0.2s; }
+.btn-logout:hover { border-color: var(--gold); color: var(--gold-light); }
+.admin-layout { display: grid; grid-template-columns: 200px 1fr; min-height: calc(100vh - 60px); }
+.admin-sidebar { background: var(--surface-alt); border-right: 0.5px solid var(--border); padding: 1.5rem 0; }
+.admin-sidebar button { display: block; width: 100%; text-align: left; padding: 0.7rem 1.5rem; background: none; border: none; font-family: var(--sans); font-size: 0.82rem; color: #555; cursor: pointer; letter-spacing: 0.05em; transition: all 0.15s; border-left: 2px solid transparent; }
+.admin-sidebar button:hover { background: var(--surface); color: var(--navy); }
+.admin-sidebar button.active { background: var(--surface); color: var(--navy); border-left: 2px solid var(--gold); font-weight: 500; }
+.admin-content { padding: 2rem; }
+.admin-section { display: none; }
+.admin-section.active { display: block; }
+.admin-section h2 { font-family: var(--serif); font-size: 1.5rem; color: var(--navy); margin-bottom: 0.3rem; }
+.admin-rule { width: 40px; height: 2px; background: var(--gold); margin-bottom: 1.5rem; }
+
+/* Admin Cards list */
+.admin-item-list { display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 1.5rem; }
+.admin-item { background: var(--surface-alt); border: 0.5px solid var(--border); padding: 1rem 1.2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+.admin-item-info { flex: 1; min-width: 0; }
+.admin-item-title { font-weight: 500; color: var(--navy); font-size: 0.9rem; }
+.admin-item-sub { font-size: 0.8rem; color: #888; margin-top: 0.2rem; }
+.admin-item-actions { display: flex; gap: 0.5rem; flex-shrink: 0; }
+.btn-edit { background: none; border: 0.5px solid var(--border); padding: 0.3rem 0.7rem; font-size: 0.75rem; cursor: pointer; font-family: var(--sans); color: var(--blue-accent); transition: all 0.15s; }
+.btn-edit:hover { background: var(--blue-accent); color: white; border-color: var(--blue-accent); }
+.btn-delete { background: none; border: 0.5px solid var(--border); padding: 0.3rem 0.7rem; font-size: 0.75rem; cursor: pointer; font-family: var(--sans); color: #c0392b; transition: all 0.15s; }
+.btn-delete:hover { background: #c0392b; color: white; border-color: #c0392b; }
+.btn-add { background: var(--navy); color: var(--gold-light); border: none; padding: 0.55rem 1.3rem; font-family: var(--sans); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+.btn-add:hover { background: var(--navy-mid); }
+
+/* Modal */
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(10,22,40,0.85); z-index: 2000; align-items: center; justify-content: center; }
+.modal-overlay.show { display: flex; }
+.modal-box { background: var(--surface); width: 560px; max-height: 85vh; overflow-y: auto; border-top: 3px solid var(--gold); }
+.modal-header { padding: 1.5rem 1.5rem 0; display: flex; align-items: center; justify-content: space-between; }
+.modal-header h3 { font-family: var(--serif); font-size: 1.3rem; color: var(--navy); }
+.modal-close { background: none; border: none; font-size: 1.3rem; cursor: pointer; color: #888; padding: 0; line-height: 1; }
+.modal-body { padding: 1.5rem; }
+.form-group { margin-bottom: 1.1rem; }
+.form-group label { display: block; font-size: 0.78rem; font-weight: 500; color: #555; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.4rem; }
+.form-group input, .form-group textarea, .form-group select { width: 100%; border: 0.5px solid var(--border); padding: 0.55rem 0.8rem; font-family: var(--sans); font-size: 0.9rem; outline: none; background: var(--surface); color: var(--text-body); }
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--gold); }
+.form-group textarea { resize: vertical; min-height: 90px; }
+.form-hint { font-size: 0.75rem; color: #999; margin-top: 0.3rem; }
+.modal-footer { padding: 1rem 1.5rem 1.5rem; display: flex; gap: 0.8rem; justify-content: flex-end; }
+.btn-cancel { background: none; border: 0.5px solid var(--border); padding: 0.55rem 1.2rem; font-family: var(--sans); font-size: 0.82rem; cursor: pointer; color: #555; }
+.btn-save { background: var(--navy); color: var(--gold-light); border: none; padding: 0.55rem 1.5rem; font-family: var(--sans); font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; }
+.btn-save:hover { background: var(--navy-mid); }
+
+/* Toast */
+.toast { position: fixed; bottom: 2rem; right: 2rem; background: var(--navy); color: var(--gold-light); padding: 0.8rem 1.5rem; font-size: 0.85rem; z-index: 9999; transform: translateY(20px); opacity: 0; transition: all 0.3s; border-left: 3px solid var(--gold); }
+.toast.show { transform: translateY(0); opacity: 1; }
+
+/* Admin info section (lab info) */
+.info-form { max-width: 600px; }
+.info-form .form-group input { margin-bottom: 0; }
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+</style>
+</head>
+<body>
+
+<!-- ===== MAIN SITE ===== -->
+<div id="main-site">
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo" onclick="showPage('home')">
+      LEO
+      <span id="nav-subtitulo">Espectroscopía Óptica · EPN</span>
+    </div>
+    <div style="display:flex; align-items:center;">
+      <ul class="nav-links">
+        <li><button onclick="showPage('home')" id="nav-home" class="active">Inicio</button></li>
+        <li><button onclick="showPage('research')" id="nav-research">Investigación</button></li>
+        <li><button onclick="showPage('members')" id="nav-members">Miembros</button></li>
+        <li><button onclick="showPage('publications')" id="nav-publications">Publicaciones</button></li>
+        <li><button onclick="showPage('join')" id="nav-join">Únete</button></li>
+        <li><button onclick="showPage('contact')" id="nav-contact">Contacto</button></li>
+      </ul>
+      <button class="nav-admin-btn" onclick="openAdminLogin()">⚙ Admin</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-text">
+      <p class="hero-label" id="hero-label">Escuela Politécnica Nacional · Quito, Ecuador</p>
+      <h1>Laboratorio de<br><em>Espectroscopía</em><br>Óptica</h1>
+      <p id="hero-desc"></p>
+      <button class="hero-cta" onclick="showPage('research')">Conoce nuestra investigación</button>
+    </div>
+    <div class="hero-visual">
+      <svg width="320" height="210" viewBox="0 0 320 210" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="15" width="280" height="155" fill="none" stroke="rgba(200,154,46,0.3)" stroke-width="0.5"/>
+        <line x1="20" y1="170" x2="300" y2="170" stroke="rgba(200,154,46,0.4)" stroke-width="0.5"/>
+        <line x1="20" y1="15" x2="20" y2="170" stroke="rgba(200,154,46,0.4)" stroke-width="0.5"/>
+        <rect x="38" y="75" width="5" height="95" fill="#7b2fff" opacity="0.7" rx="1"/>
+        <rect x="58" y="45" width="4" height="125" fill="#5b4fff" opacity="0.8" rx="1"/>
+        <rect x="80" y="105" width="5" height="65" fill="#3b8fff" opacity="0.6" rx="1"/>
+        <rect x="105" y="25" width="7" height="145" fill="#00b4ff" opacity="0.9" rx="1"/>
+        <rect x="130" y="85" width="4" height="85" fill="#00d4b4" opacity="0.7" rx="1"/>
+        <rect x="152" y="55" width="6" height="115" fill="#00cc55" opacity="0.75" rx="1"/>
+        <rect x="175" y="110" width="4" height="60" fill="#88cc00" opacity="0.65" rx="1"/>
+        <rect x="198" y="35" width="8" height="135" fill="#ffdd00" opacity="0.85" rx="1"/>
+        <rect x="222" y="95" width="5" height="75" fill="#ffaa00" opacity="0.75" rx="1"/>
+        <rect x="245" y="65" width="6" height="105" fill="#ff6600" opacity="0.8" rx="1"/>
+        <rect x="268" y="115" width="4" height="55" fill="#ff2200" opacity="0.65" rx="1"/>
+        <text x="160" y="195" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="rgba(168,180,200,0.7)">Longitud de onda (nm)</text>
+      </svg>
+    </div>
+  </div>
+  <div class="section-alt">
+    <div class="section">
+      <h2 class="section-title">Noticias recientes</h2>
+      <div class="section-rule"></div>
+      <div class="news-grid" id="home-news"></div>
+    </div>
+  </div>
+  <div class="section">
+    <h2 class="section-title">Sobre el laboratorio</h2>
+    <div class="section-rule"></div>
+    <div class="about-grid">
+      <div class="about-text" id="about-text"></div>
+      <div class="about-stats" id="about-stats"></div>
+    </div>
+  </div>
+  <footer><p id="footer-text"></p></footer>
+</div>
+
+<!-- RESEARCH -->
+<div class="page" id="page-research">
+  <div class="section">
+    <h2 class="section-title">Investigación</h2>
+    <div class="section-rule"></div>
+    <div class="research-list" id="research-list"></div>
+  </div>
+  <footer><p id="footer-text-r"></p></footer>
+</div>
+
+<!-- MEMBERS -->
+<div class="page" id="page-members">
+  <div class="section">
+    <h2 class="section-title">Miembros del laboratorio</h2>
+    <div class="section-rule"></div>
+    <p style="color:#555; margin-bottom:2rem; font-size:0.93rem;">Nuestro equipo está compuesto por investigadores, estudiantes de posgrado y pregrado.</p>
+    <div id="members-investigadores" style="margin-bottom:2.5rem;"></div>
+    <div id="members-posgrado" style="margin-bottom:2.5rem;"></div>
+    <div id="members-pregrado"></div>
+  </div>
+  <footer><p id="footer-text-m"></p></footer>
+</div>
+
+<!-- PUBLICATIONS -->
+<div class="page" id="page-publications">
+  <div class="section">
+    <h2 class="section-title">Publicaciones</h2>
+    <div class="section-rule"></div>
+    <div id="publications-list"></div>
+  </div>
+  <footer><p id="footer-text-p"></p></footer>
+</div>
+
+<!-- JOIN -->
+<div class="page" id="page-join">
+  <div class="section">
+    <h2 class="section-title">Únete al laboratorio</h2>
+    <div class="section-rule"></div>
+    <p style="color:#555; font-size:0.93rem; max-width:680px; margin-bottom:2rem;">El LEO siempre está buscando personas motivadas con interés en óptica, espectroscopía y física experimental.</p>
+    <div class="join-grid">
+      <div>
+        <div class="join-block" style="margin-bottom:2rem;">
+          <h3>Estudiantes de pregrado</h3>
+          <p>Ofrecemos proyectos de tesis y pasantías en nuestras líneas de investigación activas.</p>
+          <ul><li>Carreras de Física, Química, Ingeniería</li><li>Duración mínima recomendada: 6 meses</li><li>Posibilidad de coautoría en publicaciones</li></ul>
+        </div>
+        <div class="join-block">
+          <h3>Estudiantes de posgrado</h3>
+          <p>Aceptamos postulantes para maestría y doctorado. Los temas se definen con el estudiante.</p>
+          <ul><li>Maestría en Física o áreas afines</li><li>Acceso a equipos de última generación</li><li>Posibilidad de estancias internacionales</li></ul>
+        </div>
+      </div>
+      <div>
+        <div class="join-block" style="margin-bottom:2rem;">
+          <h3>Postdoctorado y visitas</h3>
+          <p>Recibimos investigadores postdoctorales e investigadores visitantes interesados en colaboraciones.</p>
+        </div>
+        <div style="background:var(--navy); padding:2rem;">
+          <h4 style="font-family:var(--serif); font-size:1.1rem; color:var(--gold-light); margin-bottom:0.8rem;">¿Cómo postularte?</h4>
+          <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:1rem;">Envíanos un correo con tu CV y una breve descripción de tus intereses.</p>
+          <a id="join-email" href="#" style="display:inline-block; padding:0.5rem 1.4rem; border:1.5px solid var(--gold); color:var(--gold-light); font-size:0.8rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:500; text-decoration:none;"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer><p id="footer-text-j"></p></footer>
+</div>
+
+<!-- CONTACT -->
+<div class="page" id="page-contact">
+  <div class="contact-page">
+    <div class="contact-inner">
+      <h2 class="section-title">Contacto</h2>
+      <div class="section-rule"></div>
+      <div class="contact-grid" id="contact-grid"></div>
+      <div class="supporters">
+        <p class="supporters-label">Patrocinadores y afiliaciones</p>
+        <div class="supporters-list" id="supporters-list"></div>
+      </div>
+    </div>
+  </div>
+  <footer><p id="footer-text-c"></p></footer>
+</div>
+</div><!-- end #main-site -->
+
+<!-- ===== ADMIN LOGIN OVERLAY ===== -->
+<div id="admin-login-overlay">
+  <div class="login-box">
+    <h2>Panel de administración</h2>
+    <p>Acceso restringido al equipo del laboratorio</p>
+    <input type="password" id="admin-password" placeholder="Contraseña" onkeydown="if(event.key==='Enter') checkLogin()"/>
+    <button class="btn-primary" onclick="checkLogin()">Ingresar</button>
+    <p class="login-error" id="login-error">Contraseña incorrecta.</p>
+    <p style="margin-top:1rem; font-size:0.78rem; color:#bbb; cursor:pointer;" onclick="closeAdminLogin()">← Volver al sitio</p>
+  </div>
+</div>
+
+<!-- ===== ADMIN PANEL ===== -->
+<div id="admin-panel">
+  <div class="admin-header">
+    <div>
+      <h1>Panel de administración — LEO</h1>
+      <span>Escuela Politécnica Nacional</span>
+    </div>
+    <div style="display:flex; gap:1rem; align-items:center;">
+      <button class="btn-logout" onclick="exportJSON()">⬇ Exportar JSON</button>
+      <button class="btn-logout" onclick="logoutAdmin()">Cerrar sesión</button>
+    </div>
+  </div>
+  <div class="admin-layout">
+    <div class="admin-sidebar">
+      <button class="active" onclick="showAdminSection('info')" id="aside-info">Información general</button>
+      <button onclick="showAdminSection('noticias')" id="aside-noticias">Noticias</button>
+      <button onclick="showAdminSection('investigacion')" id="aside-investigacion">Investigación</button>
+      <button onclick="showAdminSection('miembros')" id="aside-miembros">Miembros</button>
+      <button onclick="showAdminSection('publicaciones')" id="aside-publicaciones">Publicaciones</button>
+    </div>
+    <div class="admin-content">
+
+      <!-- INFO SECTION -->
+      <div class="admin-section active" id="admin-info">
+        <h2>Información general</h2>
+        <div class="admin-rule"></div>
+        <div class="info-form">
+          <div class="form-group"><label>Nombre del laboratorio</label><input type="text" id="info-nombre"/></div>
+          <div class="form-group"><label>Sigla</label><input type="text" id="info-sigla"/></div>
+          <div class="form-group"><label>Institución</label><input type="text" id="info-institucion"/></div>
+          <div class="form-group"><label>Ciudad</label><input type="text" id="info-ciudad"/></div>
+          <div class="form-group"><label>Descripción corta (hero)</label><textarea id="info-desc-corta"></textarea></div>
+          <div class="form-group"><label>Descripción larga (sección Sobre)</label><textarea id="info-desc-larga" style="min-height:120px;"></textarea></div>
+          <p style="font-size:0.82rem; font-weight:500; color:var(--navy); margin-bottom:0.8rem; text-transform:uppercase; letter-spacing:0.05em;">Estadísticas</p>
+          <div class="stats-grid">
+            <div class="form-group"><label>Publicaciones</label><input type="text" id="stat-pub"/></div>
+            <div class="form-group"><label>Investigadores</label><input type="text" id="stat-inv"/></div>
+            <div class="form-group"><label>Proyectos activos</label><input type="text" id="stat-proy"/></div>
+            <div class="form-group"><label>Años de trayectoria</label><input type="text" id="stat-años"/></div>
+          </div>
+          <p style="font-size:0.82rem; font-weight:500; color:var(--navy); margin-bottom:0.8rem; text-transform:uppercase; letter-spacing:0.05em;">Contacto</p>
+          <div class="form-group"><label>Email</label><input type="text" id="info-email"/></div>
+          <div class="form-group"><label>Edificio / Piso</label><input type="text" id="info-edificio"/></div>
+          <div class="form-group"><label>Dirección</label><input type="text" id="info-dir"/></div>
+          <div class="form-group"><label>Sitio web</label><input type="text" id="info-web"/></div>
+          <div class="form-group"><label>Patrocinadores (separados por coma)</label><input type="text" id="info-sponsors"/></div>
+          <button class="btn-add" onclick="saveInfo()">Guardar cambios</button>
+        </div>
+      </div>
+
+      <!-- NOTICIAS -->
+      <div class="admin-section" id="admin-noticias">
+        <h2>Noticias</h2>
+        <div class="admin-rule"></div>
+        <div class="admin-item-list" id="admin-noticias-list"></div>
+        <button class="btn-add" onclick="openModal('noticia', null)">+ Agregar noticia</button>
+      </div>
+
+      <!-- INVESTIGACION -->
+      <div class="admin-section" id="admin-investigacion">
+        <h2>Líneas de investigación</h2>
+        <div class="admin-rule"></div>
+        <div class="admin-item-list" id="admin-investigacion-list"></div>
+        <button class="btn-add" onclick="openModal('investigacion', null)">+ Agregar línea</button>
+      </div>
+
+      <!-- MIEMBROS -->
+      <div class="admin-section" id="admin-miembros">
+        <h2>Miembros</h2>
+        <div class="admin-rule"></div>
+        <div class="admin-item-list" id="admin-miembros-list"></div>
+        <button class="btn-add" onclick="openModal('miembro', null)">+ Agregar miembro</button>
+      </div>
+
+      <!-- PUBLICACIONES -->
+      <div class="admin-section" id="admin-publicaciones">
+        <h2>Publicaciones</h2>
+        <div class="admin-rule"></div>
+        <div class="admin-item-list" id="admin-publicaciones-list"></div>
+        <button class="btn-add" onclick="openModal('publicacion', null)">+ Agregar publicación</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3 id="modal-title">Editar</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
+      <button class="btn-save" onclick="saveModal()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== DATA =====
+let DATA = null;
+let ADMIN_PASS = "leo2025"; // Cambiar la contraseña aquí
+let modalType = null;
+let modalId = null;
+
+// Load JSON
+async function loadData() {
+  try {
+    const res = await fetch('contenido.json');
+    DATA = await res.json();
+  } catch(e) {
+    // fallback demo data if no server
+    DATA = getDemoData();
+  }
+  renderSite();
+}
+
+function getDemoData() {
+  return {
+    laboratorio: {
+      nombre:"Laboratorio de Espectroscopía Óptica", sigla:"LEO",
+      institucion:"Escuela Politécnica Nacional", ciudad:"Quito, Ecuador",
+      descripcion_corta:"Investigamos la interacción entre la luz y la materia mediante técnicas avanzadas de espectroscopía.",
+      descripcion_larga:"El Laboratorio de Espectroscopía Óptica (LEO) de la EPN es un grupo de investigación dedicado al estudio de la interacción entre la radiación electromagnética y la materia.",
+      estadisticas:{ publicaciones:"12+", investigadores:"8", proyectos:"5", años:"15+" },
+      contacto:{ email:"leo@epn.edu.ec", edificio:"Edificio de Física, Piso 3", direccion:"Ladrón de Guevara E11-253", web:"www.epn.edu.ec" },
+      patrocinadores:["Escuela Politécnica Nacional","SENESCYT","Departamento de Física — EPN","PROMETEO"]
+    },
+    noticias:[
+      {id:1,tag:"Publicación",titulo:"Nueva publicación en espectroscopía Raman de materiales 2D",descripcion:"Caracterización de monocapas de MoS₂ mediante espectroscopía Raman de alta resolución.",fecha:"Enero 2025"},
+      {id:2,tag:"Bienvenida",titulo:"Nuevos estudiantes de posgrado se unen al laboratorio",descripcion:"Dos nuevos estudiantes de maestría inician proyectos en espectroscopía.",fecha:"Septiembre 2024"},
+      {id:3,tag:"Financiamiento",titulo:"Proyecto aprobado por SENESCYT",descripcion:"Nuevo proyecto para sensores ópticos basados en fibra.",fecha:"Agosto 2024"}
+    ],
+    investigacion:[
+      {id:1,titulo:"Espectroscopía Raman",descripcion:"Caracterización estructural de materiales en macro y nanoescala.",tags:["Materiales 2D","Nanoescala","MoS₂"]},
+      {id:2,titulo:"Absorción atómica",descripcion:"Determinación de elementos metálicos en muestras ambientales.",tags:["Análisis ambiental","Metales pesados"]},
+      {id:3,titulo:"Óptica no lineal",descripcion:"Efectos ópticos de segundo y tercer orden.",tags:["Fotónica"]}
+    ],
+    miembros:[
+      {id:1,nombre:"Dra. Isabel Pacheco",categoria:"investigador",rol:"Investigadora principal",especialidad:"Espectroscopía Raman",iniciales:"IP"},
+      {id:2,nombre:"Dr. Carlos Molina",categoria:"investigador",rol:"Investigador asociado",especialidad:"Óptica no lineal",iniciales:"CM"},
+      {id:3,nombre:"Lcda. Laura Vega",categoria:"posgrado",rol:"Doctorado",especialidad:"Fotoluminiscencia",iniciales:"LV"},
+      {id:4,nombre:"Andrea Torres",categoria:"pregrado",rol:"Pregrado",especialidad:"",iniciales:"AT"}
+    ],
+    publicaciones:[
+      {id:1,año:2025,titulo:"Raman characterization of MoS₂ monolayers",autores:"Pacheco I., Vega L.",revista:"Journal of Applied Physics, 2025"},
+      {id:2,año:2024,titulo:"Distributed optical fiber sensing for structural health monitoring",autores:"Ríos J., Pacheco I.",revista:"Sensors and Actuators A, 2024"}
+    ]
+  };
+}
+
+// ===== RENDER SITE =====
+function renderSite() {
+  const L = DATA.laboratorio;
+  const footerText = `© ${new Date().getFullYear()} ${L.nombre} · ${L.institucion} · ${L.ciudad}`;
+  document.querySelectorAll('[id^="footer-text"]').forEach(el => el.textContent = footerText);
+
+  // Hero
+  document.getElementById('hero-desc').textContent = L.descripcion_corta;
+  document.getElementById('hero-label').textContent = `${L.institucion} · ${L.ciudad}`;
+
+  // About
+  document.getElementById('about-text').innerHTML = `<p>${L.descripcion_larga}</p>`;
+  const s = L.estadisticas;
+  document.getElementById('about-stats').innerHTML = `
+    <div class="stat-box"><span class="stat-number">${s.publicaciones}</span><span class="stat-label">Publicaciones</span></div>
+    <div class="stat-box"><span class="stat-number">${s.investigadores}</span><span class="stat-label">Investigadores</span></div>
+    <div class="stat-box"><span class="stat-number">${s.proyectos}</span><span class="stat-label">Proyectos activos</span></div>
+    <div class="stat-box"><span class="stat-number">${s.años}</span><span class="stat-label">Años de trayectoria</span></div>`;
+
+  // News
+  document.getElementById('home-news').innerHTML = DATA.noticias.map(n => `
+    <div class="news-card">
+      <p class="news-tag">${n.tag}</p>
+      <h3>${n.titulo}</h3>
+      <p>${n.descripcion}</p>
+      <p class="news-date">${n.fecha}</p>
+    </div>`).join('');
+
+  // Research
+  document.getElementById('research-list').innerHTML = DATA.investigacion.map(i => `
+    <div class="research-block">
+      <h3>${i.titulo}</h3>
+      <p>${i.descripcion}</p>
+      ${i.tags.map(t=>`<span class="research-tag">${t}</span>`).join('')}
+    </div>`).join('');
+
+  // Members
+  const cats = {investigador:'Investigadores', posgrado:'Estudiantes de posgrado', pregrado:'Estudiantes de pregrado'};
+  Object.entries(cats).forEach(([cat, label]) => {
+    const members = DATA.miembros.filter(m => m.categoria === cat);
+    const el = document.getElementById(`members-${cat === 'investigador' ? 'investigadores' : cat}`);
+    if (!el) return;
+    if (members.length === 0) { el.innerHTML = ''; return; }
+    el.innerHTML = `<p class="members-category-label">${label}</p>
+      <div class="members-grid">${members.map(m=>`
+        <div class="member-card">
+          <div class="member-avatar">${m.iniciales}</div>
+          <p class="member-name">${m.nombre}</p>
+          <p class="member-role">${m.rol}</p>
+          ${m.especialidad ? `<p class="member-sub">${m.especialidad}</p>` : ''}
+        </div>`).join('')}
+      </div>`;
+  });
+
+  // Publications
+  const años = [...new Set(DATA.publicaciones.map(p=>p.año))].sort((a,b)=>b-a);
+  document.getElementById('publications-list').innerHTML = años.map(año => `
+    <p class="pub-year-divider">${año}</p>
+    <div class="pub-list">
+      ${DATA.publicaciones.filter(p=>p.año===año).map(p=>`
+        <div class="pub-item">
+          <h4>${p.titulo}</h4>
+          <p class="pub-authors">${p.autores}</p>
+          <p class="pub-journal">${p.revista}</p>
+        </div>`).join('')}
+    </div>`).join('');
+
+  // Contact
+  const C = L.contacto;
+  document.getElementById('contact-grid').innerHTML = `
+    <div class="contact-block">
+      <h4>${L.nombre}</h4>
+      <a href="mailto:${C.email}">${C.email}</a>
+      <span>${C.edificio}</span><span>${L.institucion}</span>
+      <span>${C.direccion}</span><span>${L.ciudad}</span>
+    </div>
+    <div class="contact-block">
+      <h4>Departamento de Física</h4>
+      <a href="https://${C.web}">${C.web}</a>
+      <span>${L.institucion}</span><span>${L.ciudad}</span>
+    </div>
+    <div class="contact-block">
+      <h4>¿Te interesa unirte?</h4>
+      <span>Aceptamos estudiantes de pregrado, maestría y doctorado con interés en óptica y espectroscopía.</span>
+      <a href="mailto:${C.email}" style="margin-top:0.8rem; color:var(--gold);">Escríbenos →</a>
+    </div>`;
+  document.getElementById('supporters-list').innerHTML = L.patrocinadores.map(s=>`<span class="supporter-tag">${s}</span>`).join('');
+
+  // Join email
+  const je = document.getElementById('join-email');
+  if(je){ je.href=`mailto:${C.email}`; je.textContent=C.email; }
+}
+
+// ===== NAVIGATION =====
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  const btn = document.getElementById('nav-' + id);
+  if(btn) btn.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ===== ADMIN AUTH =====
+function openAdminLogin() {
+  document.getElementById('admin-login-overlay').classList.add('show');
+  setTimeout(()=>document.getElementById('admin-password').focus(), 100);
+}
+function closeAdminLogin() {
+  document.getElementById('admin-login-overlay').classList.remove('show');
+  document.getElementById('admin-password').value='';
+  document.getElementById('login-error').style.display='none';
+}
+function checkLogin() {
+  const val = document.getElementById('admin-password').value;
+  if(val === ADMIN_PASS) {
+    closeAdminLogin();
+    document.getElementById('main-site').style.display='none';
+    document.getElementById('admin-panel').classList.add('show');
+    loadAdminForms();
+  } else {
+    document.getElementById('login-error').style.display='block';
+  }
+}
+function logoutAdmin() {
+  document.getElementById('admin-panel').classList.remove('show');
+  document.getElementById('main-site').style.display='block';
+  renderSite();
+}
+
+// ===== ADMIN SECTIONS =====
+function showAdminSection(id) {
+  document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.admin-sidebar button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('admin-'+id).classList.add('active');
+  document.getElementById('aside-'+id).classList.add('active');
+}
+
+function loadAdminForms() {
+  const L = DATA.laboratorio;
+  document.getElementById('info-nombre').value = L.nombre;
+  document.getElementById('info-sigla').value = L.sigla;
+  document.getElementById('info-institucion').value = L.institucion;
+  document.getElementById('info-ciudad').value = L.ciudad;
+  document.getElementById('info-desc-corta').value = L.descripcion_corta;
+  document.getElementById('info-desc-larga').value = L.descripcion_larga;
+  document.getElementById('stat-pub').value = L.estadisticas.publicaciones;
+  document.getElementById('stat-inv').value = L.estadisticas.investigadores;
+  document.getElementById('stat-proy').value = L.estadisticas.proyectos;
+  document.getElementById('stat-años').value = L.estadisticas.años;
+  document.getElementById('info-email').value = L.contacto.email;
+  document.getElementById('info-edificio').value = L.contacto.edificio;
+  document.getElementById('info-dir').value = L.contacto.direccion;
+  document.getElementById('info-web').value = L.contacto.web;
+  document.getElementById('info-sponsors').value = L.patrocinadores.join(', ');
+  renderAdminLists();
+}
+
+function renderAdminLists() {
+  // Noticias
+  document.getElementById('admin-noticias-list').innerHTML = DATA.noticias.map(n=>`
+    <div class="admin-item">
+      <div class="admin-item-info">
+        <div class="admin-item-title">${n.titulo}</div>
+        <div class="admin-item-sub">${n.tag} · ${n.fecha}</div>
+      </div>
+      <div class="admin-item-actions">
+        <button class="btn-edit" onclick="openModal('noticia',${n.id})">Editar</button>
+        <button class="btn-delete" onclick="deleteItem('noticias',${n.id})">Eliminar</button>
+      </div>
+    </div>`).join('');
+
+  // Investigacion
+  document.getElementById('admin-investigacion-list').innerHTML = DATA.investigacion.map(i=>`
+    <div class="admin-item">
+      <div class="admin-item-info">
+        <div class="admin-item-title">${i.titulo}</div>
+        <div class="admin-item-sub">${i.tags.join(' · ')}</div>
+      </div>
+      <div class="admin-item-actions">
+        <button class="btn-edit" onclick="openModal('investigacion',${i.id})">Editar</button>
+        <button class="btn-delete" onclick="deleteItem('investigacion',${i.id})">Eliminar</button>
+      </div>
+    </div>`).join('');
+
+  // Miembros
+  document.getElementById('admin-miembros-list').innerHTML = DATA.miembros.map(m=>`
+    <div class="admin-item">
+      <div class="admin-item-info">
+        <div class="admin-item-title">${m.nombre}</div>
+        <div class="admin-item-sub">${m.rol} · ${m.categoria}</div>
+      </div>
+      <div class="admin-item-actions">
+        <button class="btn-edit" onclick="openModal('miembro',${m.id})">Editar</button>
+        <button class="btn-delete" onclick="deleteItem('miembros',${m.id})">Eliminar</button>
+      </div>
+    </div>`).join('');
+
+  // Publicaciones
+  document.getElementById('admin-publicaciones-list').innerHTML = DATA.publicaciones.map(p=>`
+    <div class="admin-item">
+      <div class="admin-item-info">
+        <div class="admin-item-title">${p.titulo}</div>
+        <div class="admin-item-sub">${p.autores} · ${p.año}</div>
+      </div>
+      <div class="admin-item-actions">
+        <button class="btn-edit" onclick="openModal('publicacion',${p.id})">Editar</button>
+        <button class="btn-delete" onclick="deleteItem('publicaciones',${p.id})">Eliminar</button>
+      </div>
+    </div>`).join('');
+}
+
+function saveInfo() {
+  DATA.laboratorio.nombre = document.getElementById('info-nombre').value;
+  DATA.laboratorio.sigla = document.getElementById('info-sigla').value;
+  DATA.laboratorio.institucion = document.getElementById('info-institucion').value;
+  DATA.laboratorio.ciudad = document.getElementById('info-ciudad').value;
+  DATA.laboratorio.descripcion_corta = document.getElementById('info-desc-corta').value;
+  DATA.laboratorio.descripcion_larga = document.getElementById('info-desc-larga').value;
+  DATA.laboratorio.estadisticas.publicaciones = document.getElementById('stat-pub').value;
+  DATA.laboratorio.estadisticas.investigadores = document.getElementById('stat-inv').value;
+  DATA.laboratorio.estadisticas.proyectos = document.getElementById('stat-proy').value;
+  DATA.laboratorio.estadisticas.años = document.getElementById('stat-años').value;
+  DATA.laboratorio.contacto.email = document.getElementById('info-email').value;
+  DATA.laboratorio.contacto.edificio = document.getElementById('info-edificio').value;
+  DATA.laboratorio.contacto.direccion = document.getElementById('info-dir').value;
+  DATA.laboratorio.contacto.web = document.getElementById('info-web').value;
+  DATA.laboratorio.patrocinadores = document.getElementById('info-sponsors').value.split(',').map(s=>s.trim()).filter(Boolean);
+  showToast('Información guardada correctamente');
+}
+
+// ===== MODAL =====
+function openModal(type, id) {
+  modalType = type; modalId = id;
+  const overlay = document.getElementById('modal-overlay');
+  const title = document.getElementById('modal-title');
+  const body = document.getElementById('modal-body');
+  let item = null;
+
+  if(id !== null) {
+    const map = {noticia:'noticias', investigacion:'investigacion', miembro:'miembros', publicacion:'publicaciones'};
+    item = DATA[map[type]].find(x=>x.id===id);
+  }
+
+  const titles = {noticia:'noticia', investigacion:'línea de investigación', miembro:'miembro', publicacion:'publicación'};
+  title.textContent = id ? `Editar ${titles[type]}` : `Nueva ${titles[type]}`;
+
+  if(type === 'noticia') {
+    body.innerHTML = `
+      <div class="form-group"><label>Etiqueta</label><input type="text" id="m-tag" value="${item?.tag||''}"/></div>
+      <div class="form-group"><label>Título</label><input type="text" id="m-titulo" value="${item?.titulo||''}"/></div>
+      <div class="form-group"><label>Descripción</label><textarea id="m-desc">${item?.descripcion||''}</textarea></div>
+      <div class="form-group"><label>Fecha</label><input type="text" id="m-fecha" value="${item?.fecha||''}"/><p class="form-hint">Ej: Enero 2025</p></div>`;
+  } else if(type === 'investigacion') {
+    body.innerHTML = `
+      <div class="form-group"><label>Título</label><input type="text" id="m-titulo" value="${item?.titulo||''}"/></div>
+      <div class="form-group"><label>Descripción</label><textarea id="m-desc">${item?.descripcion||''}</textarea></div>
+      <div class="form-group"><label>Etiquetas</label><input type="text" id="m-tags" value="${item?.tags?.join(', ')||''}"/><p class="form-hint">Separadas por coma</p></div>`;
+  } else if(type === 'miembro') {
+    body.innerHTML = `
+      <div class="form-group"><label>Nombre completo</label><input type="text" id="m-nombre" value="${item?.nombre||''}"/></div>
+      <div class="form-group"><label>Iniciales (2–3 letras)</label><input type="text" id="m-iniciales" value="${item?.iniciales||''}"/></div>
+      <div class="form-group"><label>Categoría</label>
+        <select id="m-cat">
+          <option value="investigador" ${item?.categoria==='investigador'?'selected':''}>Investigador</option>
+          <option value="posgrado" ${item?.categoria==='posgrado'?'selected':''}>Posgrado</option>
+          <option value="pregrado" ${item?.categoria==='pregrado'?'selected':''}>Pregrado</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Rol</label><input type="text" id="m-rol" value="${item?.rol||''}"/><p class="form-hint">Ej: Investigadora principal, Maestría</p></div>
+      <div class="form-group"><label>Especialidad</label><input type="text" id="m-esp" value="${item?.especialidad||''}"/></div>`;
+  } else if(type === 'publicacion') {
+    body.innerHTML = `
+      <div class="form-group"><label>Título</label><textarea id="m-titulo">${item?.titulo||''}</textarea></div>
+      <div class="form-group"><label>Autores</label><input type="text" id="m-autores" value="${item?.autores||''}"/></div>
+      <div class="form-group"><label>Revista / Journal</label><input type="text" id="m-revista" value="${item?.revista||''}"/></div>
+      <div class="form-group"><label>Año</label><input type="number" id="m-año" value="${item?.año||new Date().getFullYear()}"/></div>`;
+  }
+
+  overlay.classList.add('show');
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('show');
+  modalType = null; modalId = null;
+}
+
+function saveModal() {
+  const map = {noticia:'noticias', investigacion:'investigacion', miembro:'miembros', publicacion:'publicaciones'};
+  const arr = DATA[map[modalType]];
+  const newId = modalId || (arr.length ? Math.max(...arr.map(x=>x.id)) + 1 : 1);
+  let newItem = { id: newId };
+
+  if(modalType === 'noticia') {
+    newItem = {...newItem, tag: document.getElementById('m-tag').value, titulo: document.getElementById('m-titulo').value, descripcion: document.getElementById('m-desc').value, fecha: document.getElementById('m-fecha').value};
+  } else if(modalType === 'investigacion') {
+    newItem = {...newItem, titulo: document.getElementById('m-titulo').value, descripcion: document.getElementById('m-desc').value, tags: document.getElementById('m-tags').value.split(',').map(t=>t.trim()).filter(Boolean)};
+  } else if(modalType === 'miembro') {
+    newItem = {...newItem, nombre: document.getElementById('m-nombre').value, iniciales: document.getElementById('m-iniciales').value, categoria: document.getElementById('m-cat').value, rol: document.getElementById('m-rol').value, especialidad: document.getElementById('m-esp').value};
+  } else if(modalType === 'publicacion') {
+    newItem = {...newItem, titulo: document.getElementById('m-titulo').value, autores: document.getElementById('m-autores').value, revista: document.getElementById('m-revista').value, año: parseInt(document.getElementById('m-año').value)};
+  }
+
+  if(modalId) {
+    const idx = arr.findIndex(x=>x.id===modalId);
+    arr[idx] = newItem;
+  } else {
+    arr.push(newItem);
+  }
+
+  closeModal();
+  renderAdminLists();
+  showToast('Guardado correctamente');
+}
+
+function deleteItem(collection, id) {
+  if(!confirm('¿Eliminar este elemento?')) return;
+  DATA[collection] = DATA[collection].filter(x=>x.id!==id);
+  renderAdminLists();
+  showToast('Elemento eliminado');
+}
+
+// ===== EXPORT JSON =====
+function exportJSON() {
+  const blob = new Blob([JSON.stringify(DATA, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'contenido.json'; a.click();
+  URL.revokeObjectURL(url);
+  showToast('JSON exportado — reemplaza el archivo contenido.json');
+}
+
+// ===== TOAST =====
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 3000);
+}
+
+// Init
+loadData();
+</script>
+</body>
+</html>

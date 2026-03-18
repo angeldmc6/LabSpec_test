@@ -1,0 +1,178 @@
+{
+  "laboratorio": {
+    "nombre": "Laboratorio de Espectroscopía Óptica",
+    "sigla": "LEO",
+    "institucion": "Escuela Politécnica Nacional",
+    "ciudad": "Quito, Ecuador",
+    "descripcion_corta": "Investigamos la interacción entre la luz y la materia mediante técnicas avanzadas de espectroscopía, con aplicaciones en ciencia de materiales, física atómica y detección molecular.",
+    "descripcion_larga": "El Laboratorio de Espectroscopía Óptica (LEO) de la Escuela Politécnica Nacional es un grupo de investigación dedicado al estudio de la interacción entre la radiación electromagnética y la materia. Combinamos técnicas de espectroscopía de vanguardia con aplicaciones en ciencia de materiales, física atómica y desarrollo de sensores. Pertenecemos al Departamento de Física de la EPN y colaboramos activamente con grupos nacionales e internacionales.",
+    "estadisticas": {
+      "publicaciones": "12+",
+      "investigadores": "8",
+      "proyectos": "5",
+      "años": "15+"
+    },
+    "contacto": {
+      "email": "leo@epn.edu.ec",
+      "edificio": "Edificio de Física, Piso 3",
+      "direccion": "Ladrón de Guevara E11-253",
+      "web": "www.epn.edu.ec"
+    },
+    "patrocinadores": [
+      "Escuela Politécnica Nacional",
+      "SENESCYT",
+      "Departamento de Física — EPN",
+      "PROMETEO"
+    ]
+  },
+  "noticias": [
+    {
+      "id": 1,
+      "tag": "Publicación",
+      "titulo": "Nueva publicación en espectroscopía Raman de materiales 2D",
+      "descripcion": "Caracterización de monocapas de MoS₂ mediante espectroscopía Raman de alta resolución.",
+      "fecha": "Enero 2025"
+    },
+    {
+      "id": 2,
+      "tag": "Bienvenida",
+      "titulo": "Nuevos estudiantes de posgrado se unen al laboratorio",
+      "descripcion": "Dos nuevos estudiantes de maestría inician proyectos en espectroscopía de absorción y óptica no lineal.",
+      "fecha": "Septiembre 2024"
+    },
+    {
+      "id": 3,
+      "tag": "Financiamiento",
+      "titulo": "Proyecto aprobado por SENESCYT",
+      "descripcion": "Nuevo proyecto para el desarrollo de sensores ópticos basados en fibra, financiado por SENESCYT.",
+      "fecha": "Agosto 2024"
+    }
+  ],
+  "investigacion": [
+    {
+      "id": 1,
+      "titulo": "Espectroscopía Raman",
+      "descripcion": "Estudiamos la dispersión inelástica de luz para caracterizar la estructura molecular y cristalina de materiales en macro y nanoescala. Nuestro enfoque incluye materiales 2D (grafeno, dicalcogenuros de metales de transición) y materiales con propiedades emergentes.",
+      "tags": ["Materiales 2D", "Nanoescala", "MoS₂"]
+    },
+    {
+      "id": 2,
+      "titulo": "Espectroscopía de absorción atómica",
+      "descripcion": "Desarrollamos y aplicamos métodos para la determinación cuantitativa de elementos metálicos en muestras ambientales, alimentarias y biológicas. El laboratorio cuenta con equipos de absorción atómica de llama y horno de grafito.",
+      "tags": ["Análisis ambiental", "Metales pesados", "Horno de grafito"]
+    },
+    {
+      "id": 3,
+      "titulo": "Óptica no lineal",
+      "descripcion": "Investigamos efectos ópticos de segundo y tercer orden en cristales fotónicos, polímeros conjugados y materiales nanocompositos. Buscamos nuevos materiales con respuesta no lineal elevada para aplicaciones en fotónica integrada.",
+      "tags": ["Generación de segundo armónico", "Fotónica"]
+    },
+    {
+      "id": 4,
+      "titulo": "Fotoluminiscencia y fluorescencia",
+      "descripcion": "Analizamos las propiedades emisoras de semiconductores, puntos cuánticos y materiales orgánicos. La espectroscopía resuelta en tiempo nos permite estudiar dinámicas de decaimiento con resolución de picosegundos.",
+      "tags": ["Puntos cuánticos", "TRPL", "Semiconductores"]
+    },
+    {
+      "id": 5,
+      "titulo": "Sensores ópticos de fibra",
+      "descripcion": "Diseñamos sensores distribuidos basados en fibra óptica para monitoreo de temperatura, deformación y composición química en entornos industriales y ambientales.",
+      "tags": ["Fibra óptica", "Sensores distribuidos", "OTDR"]
+    }
+  ],
+  "miembros": [
+    {
+      "id": 1,
+      "nombre": "Dra. Isabel Pacheco",
+      "categoria": "investigador",
+      "rol": "Investigadora principal",
+      "especialidad": "Espectroscopía Raman",
+      "iniciales": "IP"
+    },
+    {
+      "id": 2,
+      "nombre": "Dr. Carlos Molina",
+      "categoria": "investigador",
+      "rol": "Investigador asociado",
+      "especialidad": "Óptica no lineal",
+      "iniciales": "CM"
+    },
+    {
+      "id": 3,
+      "nombre": "Lcda. Laura Vega",
+      "categoria": "posgrado",
+      "rol": "Doctorado",
+      "especialidad": "Fotoluminiscencia",
+      "iniciales": "LV"
+    },
+    {
+      "id": 4,
+      "nombre": "Ing. Javier Ríos",
+      "categoria": "posgrado",
+      "rol": "Maestría",
+      "especialidad": "Sensores de fibra",
+      "iniciales": "JR"
+    },
+    {
+      "id": 5,
+      "nombre": "Ing. María Quiñónez",
+      "categoria": "posgrado",
+      "rol": "Maestría",
+      "especialidad": "Absorción atómica",
+      "iniciales": "MQ"
+    },
+    {
+      "id": 6,
+      "nombre": "Andrea Torres",
+      "categoria": "pregrado",
+      "rol": "Pregrado",
+      "especialidad": "",
+      "iniciales": "AT"
+    },
+    {
+      "id": 7,
+      "nombre": "Diego Llerena",
+      "categoria": "pregrado",
+      "rol": "Pregrado",
+      "especialidad": "",
+      "iniciales": "DL"
+    }
+  ],
+  "publicaciones": [
+    {
+      "id": 1,
+      "año": 2025,
+      "titulo": "Raman characterization of MoS₂ monolayers grown by chemical vapor deposition on Si substrates",
+      "autores": "Pacheco I., Vega L., Molina C.",
+      "revista": "Journal of Applied Physics, 2025"
+    },
+    {
+      "id": 2,
+      "año": 2024,
+      "titulo": "Distributed optical fiber sensing for structural health monitoring in Andean infrastructure",
+      "autores": "Ríos J., Pacheco I.",
+      "revista": "Sensors and Actuators A: Physical, 2024"
+    },
+    {
+      "id": 3,
+      "año": 2024,
+      "titulo": "Third-order nonlinear optical response of zinc oxide nanocomposites",
+      "autores": "Molina C., Quiñónez M., Pacheco I.",
+      "revista": "Optics Communications, 2024"
+    },
+    {
+      "id": 4,
+      "año": 2023,
+      "titulo": "Time-resolved photoluminescence of CdSe/ZnS quantum dots in polymer matrices",
+      "autores": "Vega L., Pacheco I.",
+      "revista": "Journal of Luminescence, 2023"
+    },
+    {
+      "id": 5,
+      "año": 2023,
+      "titulo": "Flame atomic absorption spectrometry for heavy metal detection in Ecuadorian water sources",
+      "autores": "Quiñónez M., Molina C., Pacheco I.",
+      "revista": "Environmental Monitoring and Assessment, 2023"
+    }
+  ]
+}
