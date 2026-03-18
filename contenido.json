@@ -123,6 +123,15 @@
       "especialidad": "LIBS · MALDI-TOF · Espectroscopía láser · Nanociencia",
       "iniciales": "CC",
       "foto": ""
+    },
+    {
+      "id": 2,
+      "nombre": "Prof. Dr. Juan Molina Morocho",
+      "iniciales": "",
+      "categoria": "investigador",
+      "rol": "Coordinador",
+      "especialidad": "LIBS",
+      "foto": null
     }
   ],
   "publicaciones": [
