@@ -5,26 +5,26 @@
     "institucion": "Escuela Politécnica Nacional",
     "ciudad": "Quito, Ecuador",
     "descripcion_corta": "Desarrollamos y aplicamos técnicas avanzadas de espectroscopía láser y espectrometría de masas para el estudio de la materia, con aplicaciones en ciencia de materiales, análisis ambiental y nanociencia.",
-    "descripcion_larga": "El Laboratorio de Espectroscopía Óptica (LEO) del Departamento de Física y Astronomía de la EPN investiga la interacción entre la radiación electromagnética y la materia. Nuestro trabajo abarca desde la espectrometría de masas MALDI-TOF hasta la espectroscopía de desgaste inducida por láser (LIBS), fluorescencia láser y análisis de gases en medios dispersivos. Colaboramos activamente con grupos de investigación en Europa, América Latina y el mundo.",
+    "descripcion_larga": "El Laboratorio de Espectroscopía Óptica (LEO) del Departamento de Física de la Escuela Politécnica Nacional (EPN) investiga la interacción entre la radiación electromagnética y la materia. Nuestro trabajo abarca desde la espectrometría de masas MALDI-TOF hasta la espectroscopía de desgaste inducida por láser (LIBS), resonancia de plasmón superficial (SPR), efecto de lente térmica, dispersión dinámica de luz (DLS), multispectral imaging, fluorescencia láser y análisis de gases en medios dispersivos (GASMAS). Colaboramos activamente con grupos de investigación en Europa, América Latina y varias otras regiones del mundo.",
     "estadisticas": {
-      "publicaciones": "30+",
+      "publicaciones": "20+",
       "investigadores": "6",
       "proyectos": "4",
       "años": "30+"
     },
     "contacto": {
       "email": "cesar.costa@epn.edu.ec",
-      "edificio": "Departamento de Física y Astronomía",
+      "edificio": "Departamento de Física",
       "direccion": "Ladrón de Guevara E11-253, Quito",
-      "telefono": "+593 2 2567846 ext. 2636",
+      "telefono": "+593 2 2567846 ext. 1713",
       "web": "www.epn.edu.ec"
     },
     "patrocinadores": [
       "Escuela Politécnica Nacional",
+      "ERASMUS+",
       "SENESCYT",
       "Alexander von Humboldt Foundation",
-      "Uppsala University – IPPS",
-      "NanoAndes"
+      "Red NanoAndes."
     ],
     "logo": ""
   },
@@ -180,5 +180,17 @@
       "revista": "Rapid Communications in Mass Spectrometry 10, 1429–1432, 1996"
     }
   ],
-  "proyectos": []
+  "proyectos": [
+    {
+      "id": 1,
+      "titulo": "Erasmus+ EU-BEGP",
+      "descripcion": "El presente proyecto, cofinanciado por la Unión Europea, tiene como objetivo principal modernizar cursos y programas del sector energético incorporando el enfoque de economía circular. Para lograrlo, se propone:\n\nEl desarrollo colaborativo de materiales digitales de aprendizaje.\n\nLa revisión entre pares como mecanismo de aseguramiento de la calidad.\n\nLa implementación de metodologías centradas en el estudiante, como el aula invertida.\n\nEl aprendizaje basado en desafíos impulsados por la industria.\n\nEl uso de laboratorios remotos.\n\nEl proyecto EU-BEGP reúne a 11 universidades de seis países diversos: Francia, España, Bolivia, Ecuador, Guatemala y Perú. Su origen se remonta a una convocatoria realizada en 2021, que dio inicio a un esfuerzo conjunto entre los socios para elaborar una propuesta integral.\n\nTras varios meses de trabajo coordinado, la propuesta fue finalizada y aprobada a finales de 2022. Este hito marcó el inicio de una iniciativa orientada a fomentar la excelencia educativa y la innovación mediante la colaboración internacional.",
+      "estado": "activo",
+      "financiador": "Programa Erasmus+ de la Unión Europea",
+      "investigadorPrincipal": "Colaboración entre instituciones",
+      "inicio": "2024",
+      "fin": "",
+      "imagen": "img/proyectos/proyecto-1773868267627.png"
+    }
+  ]
 }
