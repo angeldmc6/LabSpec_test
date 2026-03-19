@@ -10,7 +10,7 @@
       "publicaciones": "20+",
       "investigadores": "6",
       "proyectos": "4",
-      "años": "30+"
+      "años": "20+"
     },
     "contacto": {
       "email": "cesar.costa@epn.edu.ec",
@@ -65,19 +65,7 @@
         "Patrimonio cultural",
         "Plasma láser"
       ],
-      "imagen": ""
-    },
-    {
-      "id": 2,
-      "titulo": "Espectrometría de Masas MALDI-TOF",
-      "descripcion": "Desarrollamos y aplicamos espectrometría de masas asistida por láser para estudios de biomoléculas, proteómica y análisis forense de tintas. Hemos construido varios espectrómetros TOF con extracción retardada, reflectrón y capacidades MS/MS.",
-      "tags": [
-        "MALDI-TOF",
-        "Proteómica",
-        "Biomoléculas",
-        "Forense"
-      ],
-      "imagen": ""
+      "imagen": "img/investigacion/investigacion-1773941358242.jpeg"
     },
     {
       "id": 3,
@@ -103,15 +91,31 @@
       "imagen": ""
     },
     {
-      "id": 5,
-      "titulo": "Espectrometría de Masas de Partículas Individuales",
-      "descripcion": "Desarrollamos instrumentación para el análisis de aerosoles mediante LDI-TOF-MS bipolar sin impacto sobre la partícula. Trabajo realizado en colaboración con la Justus-Liebig University Giessen con financiamiento Alexander von Humboldt.",
+      "id": 6,
+      "titulo": "Resonancia de plasmón superficial (SPR)",
+      "descripcion": "Hemos desarrollado trabajo en el ámbito de sensores ópticos basados en resonancia de plasmones superficiales (SPR), enfocado en la detección de variaciones de concentración de analitos en regímenes de baja cantidad. Nuestra investigación abarca tanto los fundamentos físicos de la excitación de plasmones en interfaces metal-dieléctrico como la implementación y análisis de configuraciones experimentales para monitorear cambios en el índice de refracción del medio. Asimismo, hemos evaluado parámetros clave como la longitud de onda, el ángulo de incidencia y las propiedades ópticas de los materiales, con el objetivo de optimizar la sensibilidad y el límite de detección del sistema, destacando su potencial en aplicaciones de biosensado y diagnóstico biomédico.",
       "tags": [
-        "Aerosoles",
-        "LDI-TOF-MS",
-        "Partículas individuales"
+        "SPR - espectroscipía - plasmónica"
       ],
-      "imagen": ""
+      "imagen": "img/investigacion/investigacion-1773941534202.jpeg"
+    },
+    {
+      "id": 7,
+      "titulo": "Efecto de lente térmica",
+      "descripcion": "En nuestra línea de investigación empleamos el efecto de lente térmica resuelto en frecuencia como una técnica fototérmica no invasiva para la caracterización de propiedades térmicas en muestras líquidas. A partir de la modulación de un haz láser excitador, inducimos gradientes de temperatura que generan variaciones locales del índice de refracción, produciendo una lente térmica cuya respuesta dinámica es analizada mediante detección fototérmica en el dominio de la frecuencia. El estudio de la amplitud y fase de la señal en función de la frecuencia nos permite modelar la difusión de calor en el medio y determinar la difusividad térmica, a partir de la cual obtenemos la conductividad térmica. Este enfoque resulta particularmente adecuado para líquidos y nanosuspensiones, debido a su alta sensibilidad, bajo requerimiento de volumen y capacidad de medir sin contacto directo, lo que lo posiciona como una herramienta robusta en la caracterización térmica dentro de la espectroscopía fototérmica.",
+      "tags": [
+        "Nanosuspensiones - lente térmica - óptica"
+      ],
+      "imagen": "img/investigacion/investigacion-1773941762996.jpeg"
+    },
+    {
+      "id": 8,
+      "titulo": "Dispersión dinámica de luz",
+      "descripcion": "Utilizamos la dispersión dinámica de la luz como una técnica óptica no invasiva para la determinación del tamaño de partículas en nanosuspensiones. A partir del análisis de las fluctuaciones temporales de la luz dispersada, originadas por el movimiento browniano de las partículas, evaluamos la función de autocorrelación de la intensidad para extraer el coeficiente de difusión traslacional. Mediante la relación de ecuación de Stokes-Einstein, convertimos este coeficiente en un radio hidrodinámico característico, permitiendo así estimar la distribución de tamaños en el sistema. Este enfoque es especialmente adecuado para sistemas coloidales y nanosuspensiones, debido a su alta sensibilidad, rapidez de medición y capacidad de caracterizar partículas en el rango nanométrico sin requerir preparación compleja de la muestra.",
+      "tags": [
+        "DLS - laser - optica"
+      ],
+      "imagen": "img/investigacion/investigacion-1773942234903.jpeg"
     }
   ],
   "miembros": [
