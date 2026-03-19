@@ -122,32 +122,30 @@
     {
       "id": 1,
       "tipo": "activo",
-      "nombre": "Dr. César Costa Vera",
+      "nombre": "César Costa Vera",
       "iniciales": "CCV",
       "categoria": "investigador",
       "rol": "Investigador Principal · Jefe de Laboratorio",
       "especialidad": "LIBS · MALDI-TOF · Espectroscopía láser · Nanociencia",
-      "periodo": "",
+      "año_inicio": null,
+      "año_fin": null,
       "posicion_actual": "",
       "orcid": "0000-0001-5242-1892",
-      "foto": "img/miembros/miembro-1773868955956.jpg",
-      "año_inicio": null,
-      "año_fin": null
+      "foto": "img/miembros/miembro-1773868955956.jpg"
     },
     {
       "id": 2,
       "tipo": "activo",
-      "nombre": "Fis. Juan Molina",
+      "nombre": "Juan Molina",
       "iniciales": "JM",
       "categoria": "posgrado",
       "rol": "Estudiante de Doctorado",
       "especialidad": "LIBS",
-      "periodo": "",
+      "año_inicio": null,
+      "año_fin": null,
       "posicion_actual": "",
       "orcid": "0000-0002-1364-8960",
-      "foto": "img/miembros/miembro-1773869190864.jpg",
-      "año_inicio": null,
-      "año_fin": null
+      "foto": "img/miembros/miembro-1773869190864.jpg"
     },
     {
       "id": 3,
@@ -167,7 +165,7 @@
     {
       "id": 4,
       "tipo": "activo",
-      "nombre": "Ing. Andrea Paladines",
+      "nombre": "Andrea Paladines",
       "iniciales": "AP",
       "categoria": "investigador",
       "rol": "Tecnico de investigacion",
@@ -181,7 +179,7 @@
     {
       "id": 5,
       "tipo": "activo",
-      "nombre": "M.Sc. Ricardo Araguillin",
+      "nombre": "Ricardo Araguillin",
       "iniciales": "RA",
       "categoria": "posgrado",
       "rol": "Estudiante de Doctorado",
@@ -195,7 +193,7 @@
     {
       "id": 6,
       "tipo": "alumni",
-      "nombre": "Dr. Alba M. Jumbo Nogales",
+      "nombre": "Alba M. Jumbo Nogales",
       "iniciales": "AJ",
       "categoria": "investigador",
       "rol": "",
@@ -209,7 +207,7 @@
     {
       "id": 7,
       "tipo": "alumni",
-      "nombre": "Fis. Angel Mendez Cevallos",
+      "nombre": "Angel Mendez Cevallos",
       "iniciales": "AM",
       "categoria": "investigador",
       "rol": "",
@@ -223,7 +221,7 @@
     {
       "id": 8,
       "tipo": "alumni",
-      "nombre": "Fis. Juan Javier Naranjo",
+      "nombre": "Juan Javier Naranjo",
       "iniciales": "JN",
       "categoria": "investigador",
       "rol": "",
@@ -252,7 +250,7 @@
     {
       "id": 10,
       "tipo": "alumni",
-      "nombre": "Fis. Ana Terán",
+      "nombre": "Ana Terán",
       "iniciales": "AT",
       "categoria": "investigador",
       "rol": "",
@@ -266,7 +264,7 @@
     {
       "id": 11,
       "tipo": "alumni",
-      "nombre": "Fis. Camilo Díaz",
+      "nombre": "Camilo Díaz",
       "iniciales": "CD",
       "categoria": "posgrado",
       "rol": "",
@@ -294,7 +292,7 @@
     {
       "id": 13,
       "tipo": "alumni",
-      "nombre": "Fis. José González",
+      "nombre": "José González",
       "iniciales": "JG",
       "categoria": "posgrado",
       "rol": "",
