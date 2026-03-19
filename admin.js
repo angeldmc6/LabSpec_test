@@ -231,8 +231,9 @@ function openModal(type,id){
       </select></div>
     <div class="form-group"><label class="form-label">Rol</label><input class="form-ctrl" id="m-rol" value="${item?.rol||''}"/></div>
     <div class="form-group"><label class="form-label">Especialidad</label><input class="form-ctrl" id="m-esp" value="${item?.especialidad||''}"/></div>
+    <div class="form-group"><label class="form-label">Año de ingreso al laboratorio</label><input class="form-ctrl" id="m-inicio" type="number" value="${item?.año_inicio||''}" placeholder="ej: 2018"/><p class="form-hint">Usado para filtrar publicaciones ORCID por período.</p></div>
     <div id="alumni-fields" style="display:${item?.tipo==='alumni'?'block':'none'};">
-      <div class="form-group"><label class="form-label">Período en el laboratorio</label><input class="form-ctrl" id="m-periodo" value="${item?.periodo||''}"/><p class="form-hint">Ej: 2018 – 2022</p></div>
+      <div class="form-group"><label class="form-label">Año de salida del laboratorio</label><input class="form-ctrl" id="m-fin" type="number" value="${item?.año_fin||''}" placeholder="ej: 2022"/></div>
       <div class="form-group"><label class="form-label">Posición actual</label><input class="form-ctrl" id="m-posicion" value="${item?.posicion_actual||''}"/><p class="form-hint">Ej: Posdoctorante, MIT · Boston</p></div>
     </div>
     <div class="form-group"><label class="form-label">ORCID iD</label><input class="form-ctrl" id="m-orcid" value="${item?.orcid||''}" placeholder="0000-0000-0000-0000"/><p class="form-hint">Permite sincronizar publicaciones automáticamente.</p></div>
@@ -271,7 +272,7 @@ async function saveModal(){
   if(mType==='noticia') item={...item,tag:v('m-tag'),titulo:v('m-titulo'),descripcion:v('m-desc'),fecha:v('m-fecha'),imagen:mImgPath||''};
   else if(mType==='investigacion') item={...item,titulo:v('m-titulo'),descripcion:v('m-desc'),tags:v('m-tags').split(',').map(t=>t.trim()).filter(Boolean),imagen:mImgPath||''};
   else if(mType==='proyecto') item={...item,titulo:v('m-titulo'),descripcion:v('m-desc'),estado:v('m-estado'),financiador:v('m-financiador'),investigadorPrincipal:v('m-ip'),inicio:v('m-inicio'),fin:v('m-fin'),imagen:mImgPath||''};
-  else if(mType==='miembro') item={...item,tipo:v('m-tipo'),nombre:v('m-nombre'),iniciales:v('m-ini'),categoria:v('m-cat'),rol:v('m-rol'),especialidad:v('m-esp'),periodo:v('m-periodo')||'',posicion_actual:v('m-posicion')||'',orcid:v('m-orcid').trim(),foto:mImgPath||''};
+  else if(mType==='miembro') item={...item,tipo:v('m-tipo'),nombre:v('m-nombre'),iniciales:v('m-ini'),categoria:v('m-cat'),rol:v('m-rol'),especialidad:v('m-esp'),año_inicio:parseInt(v('m-inicio'))||null,año_fin:parseInt(v('m-fin'))||null,posicion_actual:v('m-posicion')||'',orcid:v('m-orcid').trim(),foto:mImgPath||''};
   else if(mType==='publicacion') item={...item,titulo:v('m-titulo'),autores:v('m-autores'),revista:v('m-revista'),año:parseInt(v('m-ano'))};
 
   if(mId!==null){const idx=arr.findIndex(x=>x.id===mId);arr[idx]=item;}else{arr.push(item);}

@@ -19,8 +19,15 @@ async function loadData(){
   DATA.miembros.forEach(m=>{
     if(!m.tipo) m.tipo='activo';
     if(!m.orcid) m.orcid='';
-    if(!m.periodo) m.periodo='';
+    if(!m.año_inicio) m.año_inicio=null;
+    if(!m.año_fin) m.año_fin=null;
     if(!m.posicion_actual) m.posicion_actual='';
+    // Migrate old free-text periodo field (e.g. "2018 – 2022") to numeric fields
+    if(m.periodo && (!m.año_inicio && !m.año_fin)){
+      const match=m.periodo.match(/(\d{4})\s*[–\-]\s*(\d{4})/);
+      if(match){ m.año_inicio=parseInt(match[1]); m.año_fin=parseInt(match[2]); }
+      else { const solo=m.periodo.match(/(\d{4})/); if(solo) m.año_inicio=parseInt(solo[1]); }
+    }
   });
   renderSite();
 }
@@ -184,9 +191,10 @@ function memberCardHTML(m){
 function alumniCardHTML(m){
   const av=m.foto?`<img src="${m.foto}" style="width:100%;height:100%;object-fit:cover;" alt="${m.nombre}"/>`:`<span>${m.iniciales}</span>`;
   const orcidLink=m.orcid?`<a href="https://orcid.org/${m.orcid}" target="_blank" class="member-orcid" style="margin-top:.3rem;">${orcidSVG(12)} ORCID</a>`:'';
-  const periodo=m.periodo?`<span style="font-size:.7rem;background:rgba(109,40,217,.1);color:var(--violet-bright);border:1px solid rgba(109,40,217,.2);border-radius:100px;padding:.1rem .6rem;margin-left:.5rem;">${m.periodo}</span>`:'';
+  const periodoStr=m.año_inicio?(m.año_fin?`${m.año_inicio} – ${m.año_fin}`:`desde ${m.año_inicio}`):'';
+  const periodoBadge=periodoStr?`<span style="font-size:.7rem;background:rgba(109,40,217,.1);color:var(--violet-bright);border:1px solid rgba(109,40,217,.2);border-radius:100px;padding:.1rem .6rem;margin-left:.5rem;">${periodoStr}</span>`:'';
   const posicion=m.posicion_actual?`<p class="alumni-info" style="font-style:italic;margin-top:.15rem;">↗ ${m.posicion_actual}</p>`:'';
-  return`<div class="alumni-card"><div class="alumni-avatar">${av}</div><div style="flex:1;min-width:0;"><p class="alumni-name">${m.nombre}${periodo}</p><p class="alumni-info">${m.rol||''}${m.especialidad?' · '+m.especialidad:''}</p>${posicion}${orcidLink}</div></div>`;
+  return`<div class="alumni-card"><div class="alumni-avatar">${av}</div><div style="flex:1;min-width:0;"><p class="alumni-name">${m.nombre}${periodoBadge}</p><p class="alumni-info">${m.rol||''}${m.especialidad?' · '+m.especialidad:''}</p>${posicion}${orcidLink}</div></div>`;
 }
 
 /* ── PUBLICATIONS ── */
@@ -230,6 +238,9 @@ async function loadOrcidPubs(){
   container.innerHTML=`<div class="orcid-loading"><span class="orcid-spin"></span>Cargando publicaciones desde ORCID…</div>`;
   const allWorks=[];
   for(const m of members){
+    // Determine the valid year range for this member
+    const yearStart = m.año_inicio ? parseInt(m.año_inicio) : null;
+    const yearEnd   = m.tipo==='alumni' && m.año_fin ? parseInt(m.año_fin) : null;
     try{
       const r=await fetch(`https://pub.orcid.org/v3.0/${m.orcid}/works`,{headers:{Accept:'application/json'}});
       if(!r.ok) continue;
@@ -238,6 +249,12 @@ async function loadOrcidPubs(){
         const s=g['work-summary']?.[0]; if(!s) return;
         const title=s.title?.title?.value||'Sin título';
         const year=parseInt(s['publication-date']?.year?.value)||0;
+        // Filter by lab period:
+        // - must be >= year of entry (if defined)
+        // - for alumni, must be <= year of exit (if defined)
+        if(year===0) return;
+        if(yearStart && year < yearStart) return;
+        if(yearEnd   && year > yearEnd)   return;
         const doi=(s['external-ids']?.['external-id']||[]).find(e=>e['external-id-type']==='doi')?.['external-id-value']||'';
         const journal=s['journal-title']?.value||'';
         allWorks.push({title,year,journal,doi,author:m.nombre,orcid:m.orcid});
@@ -245,7 +262,7 @@ async function loadOrcidPubs(){
     }catch(e){console.warn('ORCID error',m.orcid,e);}
   }
   if(!allWorks.length){
-    container.innerHTML='<p style="color:var(--muted);font-size:.88rem;">No se encontraron publicaciones públicas en ORCID. Verifica que los perfiles tengan visibilidad pública.</p>';
+    container.innerHTML='<p style="color:var(--muted);font-size:.88rem;">No se encontraron publicaciones en el período de estancia en el laboratorio. Verifica que los perfiles ORCID tengan visibilidad pública y que el año de ingreso esté configurado.</p>';
     orcidPubsLoaded=true; return;
   }
   allWorks.sort((a,b)=>b.year-a.year);
