@@ -248,7 +248,7 @@
     {
       "id": 10,
       "tipo": "alumni",
-      "nombre": "Ana Terán",
+      "nombre": "Fis. Ana Terán",
       "iniciales": "AT",
       "categoria": "investigador",
       "rol": "",
@@ -258,6 +258,34 @@
       "posicion_actual": "",
       "orcid": "0009-0008-1209-4055",
       "foto": "img/miembros/miembro-1773938761456.jpeg"
+    },
+    {
+      "id": 11,
+      "tipo": "alumni",
+      "nombre": "Fis. Camilo Díaz",
+      "iniciales": "CD",
+      "categoria": "posgrado",
+      "rol": "",
+      "especialidad": "Spectroscopu - Photonics ",
+      "año_inicio": 2017,
+      "año_fin": 2018,
+      "posicion_actual": "Physics PhD candidate at Centro de Investigaciones Ópticas de La Plata (CIOp-UNLP)",
+      "orcid": "",
+      "foto": "img/miembros/miembro-1773940382240.jpg"
+    },
+    {
+      "id": 12,
+      "tipo": "alumni",
+      "nombre": "Raquel Pincay",
+      "iniciales": "RP",
+      "categoria": "investigador",
+      "rol": "",
+      "especialidad": "LIBS",
+      "año_inicio": 202,
+      "año_fin": 2024,
+      "posicion_actual": "Teacher, LUDOTECA Highschool",
+      "orcid": "",
+      "foto": ""
     }
   ],
   "publicaciones": [],
