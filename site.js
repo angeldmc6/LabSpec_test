@@ -356,33 +356,29 @@ function showPage(id){
 }
 
 function toggleMenu(){
-  const links=document.getElementById('nav-links');
+  const drawer=document.getElementById('mobile-drawer');
+  const overlay=document.getElementById('drawer-overlay');
   const ham=document.getElementById('hamburger');
-  const isOpen=links.classList.toggle('open');
+  const isOpen=drawer.classList.toggle('open');
+  overlay.classList.toggle('show',isOpen);
   ham.classList.toggle('open',isOpen);
-  // Prevent body scroll when menu is open
   document.body.style.overflow=isOpen?'hidden':'';
 }
 function closeMenu(){
-  document.getElementById('nav-links')?.classList.remove('open');
+  document.getElementById('mobile-drawer')?.classList.remove('open');
+  document.getElementById('drawer-overlay')?.classList.remove('show');
   document.getElementById('hamburger')?.classList.remove('open');
   document.body.style.overflow='';
 }
 
-// Show hamburger only on mobile via JS (avoids flash on desktop)
+// Show hamburger only via matchMedia — no flash on desktop
 function initResponsive(){
+  // hamburger visibility is now handled purely by CSS @media
+  // This function just wires up resize listener to close menu when going back to desktop
   const mq=window.matchMedia('(max-width:640px)');
-  const ham=document.getElementById('hamburger');
-  const update=()=>{ if(ham) ham.style.display=mq.matches?'flex':'none'; if(!mq.matches) closeMenu(); };
-  update(); mq.addEventListener('change',update);
+  const update=()=>{ if(!mq.matches) closeMenu(); };
+  mq.addEventListener('change',update);
 }
 
-// Add Admin button at bottom of mobile menu
-function initMobileAdminLink(){
-  const ul=document.getElementById('nav-links');
-  if(!ul) return;
-  const li=document.createElement('li');
-  li.style.cssText='border-bottom:none;padding:1rem 1.5rem;';
-  li.innerHTML=`<button onclick="closeMenu();openAdminLogin()" style="background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.4);color:var(--violet-bright);font-size:.82rem;padding:.5rem 1.2rem;cursor:pointer;font-family:var(--body);letter-spacing:.06em;text-transform:uppercase;border-radius:6px;width:100%;">⚙ Panel Admin</button>`;
-  ul.appendChild(li);
-}
+// Remove old initMobileAdminLink — admin button is now in drawer HTML directly
+function initMobileAdminLink(){}

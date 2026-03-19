@@ -25,7 +25,8 @@
           <div class="nav-logo-sub" id="nav-sub">LEO · EPN</div>
         </div>
       </div>
-      <ul class="nav-links" id="nav-links">
+      <!-- Desktop links -->
+      <ul class="nav-links" id="nav-links-desktop">
         <li><button onclick="showPage('home')"        id="nav-home"         class="active">Inicio</button></li>
         <li><button onclick="showPage('news')"        id="nav-news"                       >Noticias</button></li>
         <li><button onclick="showPage('research')"    id="nav-research"                   >Investigación</button></li>
@@ -38,12 +39,31 @@
       <div class="nav-actions">
         <button class="nav-admin-btn" onclick="openAdminLogin()">⚙ Admin</button>
         <button id="theme-btn" class="theme-btn" onclick="toggleTheme()" title="Cambiar tema">🌙</button>
-        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menú" style="display:none;">
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menú">
           <span></span><span></span><span></span>
         </button>
       </div>
     </div>
   </nav>
+
+  <!-- Mobile drawer — lives outside nav to avoid stacking context issues -->
+  <div class="mobile-drawer" id="mobile-drawer">
+    <ul class="mobile-nav-links">
+      <li><button onclick="showPage('home')">Inicio</button></li>
+      <li><button onclick="showPage('news')">Noticias</button></li>
+      <li><button onclick="showPage('research')">Investigación</button></li>
+      <li><button onclick="showPage('projects')">Proyectos</button></li>
+      <li><button onclick="showPage('members')">Miembros</button></li>
+      <li><button onclick="showPage('publications')">Publicaciones</button></li>
+      <li><button onclick="showPage('join')">Únete</button></li>
+      <li><button onclick="showPage('contact')">Contacto</button></li>
+    </ul>
+    <div class="mobile-drawer-footer">
+      <button class="nav-admin-btn" onclick="closeMenu();openAdminLogin()" style="width:100%;text-align:center;">⚙ Panel Admin</button>
+    </div>
+  </div>
+  <!-- Overlay to close drawer when tapping outside -->
+  <div class="drawer-overlay" id="drawer-overlay" onclick="closeMenu()"></div>
 
   <!-- ── HOME ── -->
   <div class="page active" id="page-home">
