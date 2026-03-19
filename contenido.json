@@ -286,6 +286,20 @@
       "posicion_actual": "Teacher, LUDOTECA Highschool",
       "orcid": "",
       "foto": ""
+    },
+    {
+      "id": 13,
+      "tipo": "alumni",
+      "nombre": "Fis. José González",
+      "iniciales": "JG",
+      "categoria": "posgrado",
+      "rol": "",
+      "especialidad": "Dynamic Light Scattering",
+      "año_inicio": 2022,
+      "año_fin": 2025,
+      "posicion_actual": "Physics PhD stundent at Universidad Nacional de San Martin",
+      "orcid": "0009-0005-0209-4770",
+      "foto": "img/miembros/miembro-1773940697760.jpg"
     }
   ],
   "publicaciones": [],
