@@ -236,11 +236,13 @@ async function loadOrcidPubs(){
     orcidPubsLoaded=true; return;
   }
   container.innerHTML=`<div class="orcid-loading"><span class="orcid-spin"></span>Cargando publicaciones desde ORCID…</div>`;
-  const allWorks=[];
+
+  // Map keyed by DOI (preferred) or normalized title — value holds the merged work
+  const worksMap=new Map();
+
   for(const m of members){
-    // Determine the valid year range for this member
-    const yearStart = m.año_inicio ? parseInt(m.año_inicio) : null;
-    const yearEnd   = m.tipo==='alumni' && m.año_fin ? parseInt(m.año_fin) : null;
+    const yearStart=m.año_inicio?parseInt(m.año_inicio):null;
+    const yearEnd=m.tipo==='alumni'&&m.año_fin?parseInt(m.año_fin):null;
     try{
       const r=await fetch(`https://pub.orcid.org/v3.0/${m.orcid}/works`,{headers:{Accept:'application/json'}});
       if(!r.ok) continue;
@@ -249,22 +251,36 @@ async function loadOrcidPubs(){
         const s=g['work-summary']?.[0]; if(!s) return;
         const title=s.title?.title?.value||'Sin título';
         const year=parseInt(s['publication-date']?.year?.value)||0;
-        // Filter by lab period:
-        // - must be >= year of entry (if defined)
-        // - for alumni, must be <= year of exit (if defined)
         if(year===0) return;
-        if(yearStart && year < yearStart) return;
-        if(yearEnd   && year > yearEnd)   return;
-        const doi=(s['external-ids']?.['external-id']||[]).find(e=>e['external-id-type']==='doi')?.['external-id-value']||'';
+        if(yearStart&&year<yearStart) return;
+        if(yearEnd&&year>yearEnd) return;
+        const doi=(s['external-ids']?.['external-id']||[])
+          .find(e=>e['external-id-type']==='doi')?.['external-id-value']||'';
         const journal=s['journal-title']?.value||'';
-        allWorks.push({title,year,journal,doi,author:m.nombre,orcid:m.orcid});
+
+        // Deduplication key: DOI if available, otherwise normalized title
+        const key=doi?`doi:${doi.toLowerCase().trim()}`:`title:${title.toLowerCase().trim()}`;
+
+        if(worksMap.has(key)){
+          // Work already seen — just add this member as a co-author if not already listed
+          const existing=worksMap.get(key);
+          if(!existing.labAuthors.includes(m.nombre)){
+            existing.labAuthors.push(m.nombre);
+          }
+        } else {
+          worksMap.set(key,{title,year,journal,doi,labAuthors:[m.nombre]});
+        }
       });
     }catch(e){console.warn('ORCID error',m.orcid,e);}
   }
+
+  const allWorks=[...worksMap.values()];
+
   if(!allWorks.length){
     container.innerHTML='<p style="color:var(--muted);font-size:.88rem;">No se encontraron publicaciones en el período de estancia en el laboratorio. Verifica que los perfiles ORCID tengan visibilidad pública y que el año de ingreso esté configurado.</p>';
     orcidPubsLoaded=true; return;
   }
+
   allWorks.sort((a,b)=>b.year-a.year);
   const years=[...new Set(allWorks.map(w=>w.year))].filter(y=>y>0).sort((a,b)=>b-a);
   container.innerHTML=years.map(y=>`
@@ -272,7 +288,7 @@ async function loadOrcidPubs(){
     ${allWorks.filter(w=>w.year===y).map(w=>`
       <div class="pub-item">
         <h4>${w.title}</h4>
-        <p class="pub-authors">${w.author}</p>
+        <p class="pub-authors">${w.labAuthors.join(', ')}</p>
         ${w.journal?`<p class="pub-journal">${w.journal}</p>`:''}
         ${w.doi?`<a href="https://doi.org/${w.doi}" target="_blank" class="pub-doi">DOI: ${w.doi}</a>`:''}
       </div>`).join('')}`).join('');
