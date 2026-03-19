@@ -244,6 +244,20 @@
       "foto": "",
       "año_inicio": null,
       "año_fin": null
+    },
+    {
+      "id": 10,
+      "tipo": "alumni",
+      "nombre": "Ana Terán",
+      "iniciales": "AT",
+      "categoria": "investigador",
+      "rol": "",
+      "especialidad": "Thermal lensing - Spectrophotometry ",
+      "año_inicio": 2022,
+      "año_fin": 2024,
+      "posicion_actual": "",
+      "orcid": "",
+      "foto": "img/miembros/miembro-1773938761456.jpeg"
     }
   ],
   "publicaciones": [],
