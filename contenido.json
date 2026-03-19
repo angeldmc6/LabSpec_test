@@ -133,7 +133,7 @@
       "tipo": "activo",
       "nombre": "Fis. Juan Molina",
       "iniciales": "JM",
-      "categoria": "posgrado",
+      "categoria": "investigador",
       "rol": "Estudiante de Doctorado",
       "especialidad": "LIBS",
       "periodo": "",
@@ -165,7 +165,7 @@
       "periodo": "",
       "posicion_actual": "",
       "orcid": "",
-      "foto": "img/miembros/miembro-1773931612361.jpg"
+      "foto": ""
     },
     {
       "id": 5,
@@ -178,7 +178,7 @@
       "periodo": "",
       "posicion_actual": "",
       "orcid": "0000-0003-1322-2254",
-      "foto": "img/miembros/miembro-1773931635758.jpeg"
+      "foto": ""
     },
     {
       "id": 6,
@@ -191,20 +191,20 @@
       "periodo": "2016-2019",
       "posicion_actual": "Postdoctoral researcher, Max Planck Institute for the Structure and Dynamics of Matter",
       "orcid": "0000-0002-8556-2891",
-      "foto": "img/miembros/miembro-1773931756414.jpg"
+      "foto": ""
     },
     {
       "id": 7,
       "tipo": "alumni",
-      "nombre": "Fis. Angel Méndez Cevallos",
+      "nombre": "Fis. Angel Mendez Cevallos",
       "iniciales": "AM",
       "categoria": "investigador",
       "rol": "",
       "especialidad": "Surface Plasmon Resonance (SPR) - Plasmonics ",
       "periodo": "2023 - 2025",
-      "posicion_actual": "Técnico Docente, Escuela Politécnica Nacional",
+      "posicion_actual": "Tecnico Docente, Escuela Politecnica Nacional",
       "orcid": "0009-0000-0604-909X",
-      "foto": "img/miembros/miembro-1773931842509.jpg"
+      "foto": ""
     },
     {
       "id": 8,
@@ -217,7 +217,7 @@
       "periodo": "",
       "posicion_actual": "",
       "orcid": "0009-0007-4456-7083",
-      "foto": "img/miembros/miembro-1773931915513.jpg"
+      "foto": ""
     }
   ],
   "publicaciones": [],
