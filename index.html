@@ -25,7 +25,7 @@
           <div class="nav-logo-sub" id="nav-sub">LEO · EPN</div>
         </div>
       </div>
-      <ul class="nav-links">
+      <ul class="nav-links" id="nav-links">
         <li><button onclick="showPage('home')"        id="nav-home"         class="active">Inicio</button></li>
         <li><button onclick="showPage('news')"        id="nav-news"                       >Noticias</button></li>
         <li><button onclick="showPage('research')"    id="nav-research"                   >Investigación</button></li>
@@ -38,6 +38,9 @@
       <div class="nav-actions">
         <button class="nav-admin-btn" onclick="openAdminLogin()">⚙ Admin</button>
         <button id="theme-btn" class="theme-btn" onclick="toggleTheme()" title="Cambiar tema">🌙</button>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menú" style="display:none;">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </div>
   </nav>
@@ -416,6 +419,8 @@
 <script>
   initTheme();
   loadData();
+  initResponsive();
+  initMobileAdminLink();
 </script>
 </body>
 </html>
