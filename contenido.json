@@ -218,6 +218,19 @@
       "posicion_actual": "",
       "orcid": "0009-0007-4456-7083",
       "foto": ""
+    },
+    {
+      "id": 9,
+      "tipo": "activo",
+      "nombre": "Carlos Andrade",
+      "iniciales": "CA",
+      "categoria": "pregrado",
+      "rol": "Pasante",
+      "especialidad": "Quantum cryptography",
+      "periodo": "",
+      "posicion_actual": "",
+      "orcid": "",
+      "foto": ""
     }
   ],
   "publicaciones": [],
