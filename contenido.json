@@ -168,12 +168,11 @@
       "categoria": "investigador",
       "rol": "Tecnico de investigacion",
       "especialidad": "",
-      "periodo": "",
+      "año_inicio": null,
+      "año_fin": null,
       "posicion_actual": "",
       "orcid": "",
-      "foto": "",
-      "año_inicio": null,
-      "año_fin": null
+      "foto": "img/miembros/miembro-1773938191821.jpg"
     },
     {
       "id": 5,
@@ -183,12 +182,11 @@
       "categoria": "posgrado",
       "rol": "Estudiante de Doctorado",
       "especialidad": "Surface Plasmon Resonance (SPR)",
-      "periodo": "",
+      "año_inicio": null,
+      "año_fin": null,
       "posicion_actual": "",
       "orcid": "0000-0003-1322-2254",
-      "foto": "",
-      "año_inicio": null,
-      "año_fin": null
+      "foto": "img/miembros/miembro-1773938203942.jpeg"
     },
     {
       "id": 6,
@@ -212,12 +210,11 @@
       "categoria": "investigador",
       "rol": "",
       "especialidad": "Surface Plasmon Resonance (SPR) - Plasmonics ",
-      "periodo": "2023 - 2025",
+      "año_inicio": 2023,
+      "año_fin": 2025,
       "posicion_actual": "Tecnico Docente, Escuela Politecnica Nacional",
       "orcid": "0009-0000-0604-909X",
-      "foto": "",
-      "año_inicio": 2023,
-      "año_fin": 2025
+      "foto": "img/miembros/miembro-1773938225214.jpg"
     },
     {
       "id": 8,
@@ -227,12 +224,11 @@
       "categoria": "investigador",
       "rol": "",
       "especialidad": "Quantum computing - quantum algorithms ",
-      "periodo": "",
+      "año_inicio": null,
+      "año_fin": null,
       "posicion_actual": "",
       "orcid": "0009-0007-4456-7083",
-      "foto": "",
-      "año_inicio": null,
-      "año_fin": null
+      "foto": "img/miembros/miembro-1773938240834.jpg"
     },
     {
       "id": 9,
